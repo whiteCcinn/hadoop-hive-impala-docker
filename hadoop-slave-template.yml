@@ -1,0 +1,12 @@
+### hadoop-slave* ###
+    hadoop-slave$1:
+      container_name: hhid-mysql
+      build:
+        context: ./hadoop-hive
+        args:
+          - MYSQL_VERSION=${MYSQL_VERSION}
+      environment:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - TZ=${MYSQL_TIMEZONE}
+      networks:
+        - hhid-network

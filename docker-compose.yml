@@ -1,0 +1,65 @@
+networks:
+  hhid-network:
+    driver: ${NETWORKS_DRIVER}
+services:
+  hadoop-master:
+    build:
+      args:
+      - MYSQL_VERSION=${MYSQL_VERSION}
+      context: ./hadoop-hive
+    container_name: hhid-mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - TZ=${MYSQL_TIMEZONE}
+    networks:
+    - hhid-network
+  hadoop-slave1:
+    build:
+      args:
+      - MYSQL_VERSION=${MYSQL_VERSION}
+      context: ./hadoop-hive
+    container_name: hhid-mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - TZ=${MYSQL_TIMEZONE}
+    networks:
+    - hhid-network
+  hadoop-slave2:
+    build:
+      args:
+      - MYSQL_VERSION=${MYSQL_VERSION}
+      context: ./hadoop-hive
+    container_name: hhid-mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - TZ=${MYSQL_TIMEZONE}
+    networks:
+    - hhid-network
+  hadoop-slave3:
+    build:
+      args:
+      - MYSQL_VERSION=${MYSQL_VERSION}
+      context: ./hadoop-hive
+    container_name: hhid-mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - TZ=${MYSQL_TIMEZONE}
+    networks:
+    - hhid-network
+  mysql:
+    build:
+      args:
+      - MYSQL_VERSION=${MYSQL_VERSION}
+      context: ./mysql
+    container_name: hhid-mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - TZ=${MYSQL_TIMEZONE}
+    networks:
+    - hhid-network
+    ports:
+    - ${MYSQL_PORT}:3306
+    volumes:
+    - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+    - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+version: '3'

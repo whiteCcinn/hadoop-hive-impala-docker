@@ -1,0 +1,12 @@
+# Choose storage path on your machine. For all storage systems
+DATA_PATH_HOST=./data
+
+## NETWORK ##
+NETWORKS_DRIVER=bridge
+
+## MYSQL ##
+MYSQL_VERSION=5.6
+MYSQL_ROOT_PASSWORD=123456
+MYSQL_TIMEZONE=UTC
+MYSQL_PORT=3306
+MYSQL_ENTRYPOINT_INITDB=./mysql/docker-entrypoint-initdb.d
